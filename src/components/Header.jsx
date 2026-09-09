@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { userProfile } from '../data/gamesData';
+import SupabaseStatusModal from './SupabaseStatusModal';
+import { isSupabaseConfigured } from '../lib/supabaseClient';
 
 export default function Header({ searchQuery, setSearchQuery }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isSupabaseModalOpen, setIsSupabaseModalOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
@@ -138,6 +141,27 @@ export default function Header({ searchQuery, setSearchQuery }) {
             </kbd>
           </div>
 
+          {/* Supabase Connection Button */}
+          <button
+            onClick={() => setIsSupabaseModalOpen(true)}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant/40 hover:border-[#3ECF8E]/60 text-xs font-mono transition-all group shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
+            title="Connected to Supabase Project: qkfdskufngkpdczxtalu"
+          >
+            <svg className="w-3.5 h-3.5 text-[#3ECF8E] drop-shadow-[0_0_4px_rgba(62,207,142,0.6)]" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21.362 9.354H12V.396a.396.396 0 0 0-.716-.233L.863 13.914a.396.396 0 0 0 .317.632H12v8.958a.396.396 0 0 0 .716.233l10.421-13.751a.396.396 0 0 0-.317-.632z" />
+            </svg>
+            <span className="hidden sm:inline text-on-surface-variant group-hover:text-on-surface text-[11px] font-semibold">
+              Supabase
+            </span>
+            <span
+              className={`w-2 h-2 rounded-full ${
+                isSupabaseConfigured()
+                  ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]'
+                  : 'bg-amber-400 animate-pulse'
+              }`}
+            ></span>
+          </button>
+
           {/* Profile Container with Interactive HUD Popover */}
           <div className="relative" ref={dropdownRef}>
             <button
@@ -267,6 +291,18 @@ export default function Header({ searchQuery, setSearchQuery }) {
                     My Games Library
                   </button>
                   <button
+                    onClick={() => {
+                      setIsProfileOpen(false);
+                      setIsSupabaseModalOpen(true);
+                    }}
+                    className="w-full py-2 px-space-md rounded bg-[#3ECF8E]/10 border border-[#3ECF8E]/30 hover:border-[#3ECF8E]/60 text-[#3ECF8E] font-body-sm text-body-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                  >
+                    <svg className="w-4 h-4 text-[#3ECF8E]" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M21.362 9.354H12V.396a.396.396 0 0 0-.716-.233L.863 13.914a.396.396 0 0 0 .317.632H12v8.958a.396.396 0 0 0 .716.233l10.421-13.751a.396.396 0 0 0-.317-.632z" />
+                    </svg>
+                    Supabase Cloud Database
+                  </button>
+                  <button
                     onClick={() => setIsProfileOpen(false)}
                     className="w-full py-2 px-space-md rounded bg-surface-container border border-outline-variant/40 hover:border-outline text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2"
                   >
@@ -279,6 +315,12 @@ export default function Header({ searchQuery, setSearchQuery }) {
           </div>
         </div>
       </header>
+
+      {/* Supabase Status Modal */}
+      <SupabaseStatusModal
+        isOpen={isSupabaseModalOpen}
+        onClose={() => setIsSupabaseModalOpen(false)}
+      />
     </div>
   );
 }
