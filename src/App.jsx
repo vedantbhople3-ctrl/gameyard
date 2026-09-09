@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import DashboardPage from './pages/DashboardPage';
 import LibraryPage from './pages/LibraryPage';
 import GameDetailsPage from './pages/GameDetailsPage';
+import AuthPage from './pages/AuthPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -36,6 +37,9 @@ export default function App() {
             <Route path="/" element={<DashboardPage />} />
             <Route path="/library" element={<LibraryPage globalSearchQuery={searchQuery} />} />
             <Route path="/game/:id" element={<GameDetailsPage />} />
+            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/login" element={<AuthPage />} />
+            <Route path="/signup" element={<AuthPage />} />
             {/* Fallback */}
             <Route path="*" element={<DashboardPage />} />
           </Routes>
