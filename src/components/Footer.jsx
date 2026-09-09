@@ -29,6 +29,23 @@ export default function Footer() {
 
         {/* Links Grid */}
         <div className="flex flex-wrap gap-x-space-lg gap-y-space-xs items-center">
+          <a
+            href="https://t.me/gamingyard"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-[#229ED9] hover:text-white font-body-sm text-body-sm transition-colors font-medium"
+          >
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+            </svg>
+            <span>Official Telegram</span>
+          </a>
+          <Link to="/auth" className="text-secondary hover:text-white font-body-sm text-body-sm transition-colors font-medium">
+            Sign In / Register
+          </Link>
+          <Link to="/library" className="text-primary hover:text-secondary font-body-sm text-body-sm transition-colors font-medium">
+            Official Games Library
+          </Link>
           <a className="text-outline hover:text-on-surface font-body-sm text-body-sm transition-colors hover:text-secondary" href="#">
             Privacy Policy
           </a>
@@ -36,7 +53,7 @@ export default function Footer() {
             Terms of Service
           </a>
           <a className="text-outline hover:text-on-surface font-body-sm text-body-sm transition-colors hover:text-secondary" href="#">
-            Security Architecture
+            Lua Script Telemetry
           </a>
           <a className="text-outline hover:text-on-surface font-body-sm text-body-sm transition-colors hover:text-secondary" href="#">
             Developer API
@@ -44,19 +61,13 @@ export default function Footer() {
           <a className="text-outline hover:text-on-surface font-body-sm text-body-sm transition-colors hover:text-secondary" href="#">
             Community Discord
           </a>
-          <Link to="/library" className="text-primary hover:text-secondary font-body-sm text-body-sm transition-colors font-medium">
-            Official Games Library
-          </Link>
-          <a className="text-outline hover:text-on-surface font-body-sm text-body-sm transition-colors hover:text-secondary" href="#">
-            Telemetry Status
-          </a>
         </div>
       </div>
 
       {/* Copyright & Network Signature Row */}
       <div className="pt-space-md border-t border-outline-variant/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-outline font-body-sm text-body-sm">
         <div>
-          © 2024 Gaming Yard Inc. All rights reserved. 100% Authorized Demos, Mods &amp; Official Store Links.
+          © 2024 Gaming Yard Inc. 100% Safe • Games bypassed through Lua files.
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1.5">
