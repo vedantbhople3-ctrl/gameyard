@@ -54,7 +54,8 @@ export default {
         "on-tertiary-fixed-variant": "#653e00",
         "tertiary-fixed": "#ffddb8",
         "surface-container-lowest": "#0b0e15",
-        "outline-variant": "#494454"
+        "outline-variant": "#494454",
+        "telegram": "#229ED9"
       },
       borderRadius: {
         "DEFAULT": "0.125rem",

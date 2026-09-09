@@ -30,6 +30,7 @@ export default function Header({ searchQuery, setSearchQuery }) {
 
   const isLibraryActive = location.pathname === '/library';
   const isHomeActive = location.pathname === '/';
+  const isAuthActive = location.pathname === '/auth' || location.pathname === '/login' || location.pathname === '/signup';
 
   return (
     <div className="w-full relative z-50">
@@ -58,7 +59,7 @@ export default function Header({ searchQuery, setSearchQuery }) {
         <div className="flex items-center gap-4 lg:gap-space-lg">
           <Link to="/" className="flex items-center gap-space-xs group">
             <div className="w-10 h-10 rounded-lg bg-surface-container-high border border-primary/40 flex items-center justify-center shadow-[0_0_12px_rgba(208,188,255,0.35)] group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(208,188,255,0.6)] transition-all duration-300">
-              <svg className="w-6 h-6 text-primary drop-shadow-[0_0_8px_rgba(208,188,255,0.6)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-6 h-6 text-primary drop-shadow-[0_0_8px_rgba(208,188,255,0.6)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 4h16v16H4z" className="opacity-30" stroke="currentColor" strokeDasharray="2 2"></path>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 9l9-6 9 6v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor"></path>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8 13.5h3m-1.5-1.5v3" stroke="#4cd7f6" strokeWidth="2"></path>
@@ -81,41 +82,66 @@ export default function Header({ searchQuery, setSearchQuery }) {
           <nav className="hidden md:flex items-center gap-space-lg ml-space-md border-l border-outline-variant/30 pl-space-md">
             <Link
               to="/"
-              className={`font-title-md text-title-md transition-all duration-200 active:scale-95 ${
-                isHomeActive
+              className={`font-title-md text-title-md transition-all duration-200 active:scale-95 ${isHomeActive
                   ? "text-secondary border-b-2 border-secondary pb-1"
                   : "text-on-surface-variant hover:text-primary"
-              }`}
+                }`}
             >
               Home
             </Link>
             <button
               onClick={() => handleNavClick('#trending')}
-              className="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors text-left"
+              className="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors text-left cursor-pointer"
             >
               Trending
             </button>
             <button
               onClick={() => handleNavClick('#news')}
-              className="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors text-left"
+              className="text-on-surface-variant hover:text-primary font-title-md text-title-md transition-colors text-left cursor-pointer"
             >
               News
             </button>
             <Link
               to="/library"
-              className={`font-title-md text-title-md transition-all duration-200 active:scale-95 ${
-                isLibraryActive
+              className={`font-title-md text-title-md transition-all duration-200 active:scale-95 ${isLibraryActive
                   ? "text-secondary border-b-2 border-secondary pb-1 font-semibold"
                   : "text-on-surface-variant hover:text-primary"
-              }`}
+                }`}
             >
               Games Library
+            </Link>
+            <Link
+              to="/auth"
+              className={`font-title-md text-title-md transition-all duration-200 active:scale-95 ${isAuthActive
+                  ? "text-secondary border-b-2 border-secondary pb-1 font-semibold"
+                  : "text-on-surface-variant hover:text-primary"
+                }`}
+            >
+              Sign In
             </Link>
           </nav>
         </div>
 
         {/* Trailing Actions: Quick Search Bar & Profile HUD */}
         <div className="flex items-center gap-space-md">
+          {/* Direct Telegram Quick Connect Button */}
+          <a
+            href="https://t.me/gamingyard"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#229ED9]/15 hover:bg-[#229ED9]/25 border border-[#229ED9]/40 text-[#229ED9] hover:text-white transition-all duration-200 telegram-glow group cursor-pointer"
+            title="Join Official Telegram Channel"
+          >
+            <svg className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z" />
+            </svg>
+            <span className="text-xs font-semibold tracking-wide hidden sm:inline">Join Telegram</span>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+            </span>
+          </a>
+
           {/* Quick Search Bar with ⌘K */}
           <div className="relative hidden sm:flex items-center">
             <span className="material-symbols-outlined absolute left-3 text-outline text-body-md pointer-events-none">
@@ -163,9 +189,8 @@ export default function Header({ searchQuery, setSearchQuery }) {
                 </div>
               </div>
               <span
-                className={`material-symbols-outlined text-outline text-body-sm transition-transform duration-200 group-hover:text-on-surface ${
-                  isProfileOpen ? 'rotate-180' : ''
-                }`}
+                className={`material-symbols-outlined text-outline text-body-sm transition-transform duration-200 group-hover:text-on-surface ${isProfileOpen ? 'rotate-180' : ''
+                  }`}
               >
                 expand_more
               </span>
@@ -261,17 +286,29 @@ export default function Header({ searchQuery, setSearchQuery }) {
                       setIsProfileOpen(false);
                       navigate('/library');
                     }}
-                    className="w-full py-2 px-space-md rounded bg-primary text-on-primary font-headline-sm text-body-sm font-semibold hover:shadow-[0_0_16px_rgba(208,188,255,0.5)] transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                    className="w-full py-2 px-space-md rounded bg-primary text-on-primary font-headline-sm text-body-sm font-semibold hover:shadow-[0_0_16px_rgba(208,188,255,0.5)] transition-all active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <span className="material-symbols-outlined text-body-md">sports_esports</span>
                     My Games Library
                   </button>
                   <button
+                    onClick={() => {
+                      setIsProfileOpen(false);
+                      setIsSupabaseModalOpen(true);
+                    }}
+                    className="w-full py-2 px-space-md rounded bg-[#3ECF8E]/10 border border-[#3ECF8E]/30 hover:border-[#3ECF8E]/60 text-[#3ECF8E] font-body-sm text-body-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                  >
+                    <svg className="w-4 h-4 text-[#3ECF8E]" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M21.362 9.354H12V.396a.396.396 0 0 0-.716-.233L.863 13.914a.396.396 0 0 0 .317.632H12v8.958a.396.396 0 0 0 .716.233l10.421-13.751a.396.396 0 0 0-.317-.632z" />
+                    </svg>
+                    Supabase Cloud Database
+                  </button>
+                  <button
                     onClick={() => setIsProfileOpen(false)}
                     className="w-full py-2 px-space-md rounded bg-surface-container border border-outline-variant/40 hover:border-outline text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2"
                   >
-                    <span className="material-symbols-outlined text-body-md">settings</span>
-                    Account Settings
+                    <span className="material-symbols-outlined text-body-md">lock</span>
+                    Sign In / Switch Account
                   </button>
                 </div>
               </div>
